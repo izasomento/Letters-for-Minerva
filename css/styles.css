@@ -1,41 +1,25 @@
-/* 
-   Minerva University — Official Brand Identity 
-   Source: Brand Resources & Standards Guide (Updated Fall 2025)
-*/
-
+/* Who2Ask — Custom Properties */
 :root {
-    /* Primary Color Palette */
-    --mu-obsidian: #000000;
-    --mu-white: #ffffff;
-    --mu-bone: #f0ebe6;
-    --mu-ivory: #f2f2f2;
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --secondary-color: #f3f4f6;
+    --secondary-hover: #e5e7eb;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --bg-app: #f9fafb;
+    --bg-card: #ffffff;
+    --border-color: #e5e7eb;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --radius: 12px;
+    --container-width: 720px;
     
-    /* Highlight Colors (Accents) */
-    --mu-goldenrod: #f0b91e;
-    --mu-tangerine: #f0871e;
-    --mu-clay: #905112;
-
-    /* Neutrals */
-    --mu-charcoal: #3c3732;
-    --mu-slate: #5a5550;
-    --mu-graphite: #78736e;
-    --mu-ash: #d2cdc8;
-
-    /* Functional UI Colors */
-    --bg-main: var(--mu-bone);
-    --text-main: var(--mu-obsidian);
-    --text-muted: var(--mu-slate);
-    --accent: var(--mu-clay);
-
-    /* Typography Fallbacks */
-    --font-serif: "Chronicle Display", "Garamond", "Times New Roman", serif;
-    --font-sans: "Neue Haas Grotesk", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-    
-    /* Spacing & UI Patterns */
-    --spacing-unit: 1rem;
-    --border-radius: 8px; /* Standard rounded corners per guidelines */
+    /* Result Colors */
+    --color-strong: #10b981;
+    --color-work: #f59e0b;
+    --color-fit: #ef4444;
 }
 
+/* Base Reset */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -43,91 +27,272 @@
 }
 
 body {
-    font-family: var(--font-sans);
-    line-height: 1.5;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-app);
     color: var(--text-main);
-    background-color: var(--bg-main);
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
 }
 
 .container {
-    max-width: 800px;
+    max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 var(--spacing-unit);
+    padding: 0 20px;
 }
 
-/* Typography Hierarchy per Standards */
-h1 {
-    font-family: var(--font-serif);
-    font-weight: 300; /* Light */
-    font-size: 3rem;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
+/* Layout */
+.app-header {
+    background-color: var(--bg-card);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 40px;
 }
 
-h2 {
-    font-family: var(--font-sans);
-    font-weight: 600; /* Medium/Bold */
+.logo {
     font-size: 1.5rem;
-    color: var(--mu-clay);
-    margin-bottom: 1rem;
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
-h3 {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 1rem;
-    margin-bottom: 0.75rem;
+#app-container {
+    min-height: 60vh;
 }
 
-p {
-    font-size: 1.125rem; /* 18pt equivalent for digital */
-    margin-bottom: 1.25rem;
-}
-
-/* UI Elements */
-.card {
-    background: var(--mu-white);
-    border-radius: var(--border-radius);
-    padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-header {
-    background-color: var(--mu-obsidian);
-    color: var(--mu-white);
-    padding: 4rem 0;
-    text-align: left; /* Standards prefer left or centered */
-}
-
-.subtitle {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 1.25rem;
-    opacity: 0.8;
-}
-
-footer {
-    background: var(--mu-ash);
-    padding: 3rem 0;
-    margin-top: 4rem;
-}
-
-.ai-disclosure {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+.app-footer {
+    margin-top: 60px;
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
     font-size: 0.875rem;
 }
 
+/* Components */
+.card {
+    background-color: var(--bg-card);
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    transition: opacity 0.3s ease;
+}
+
+.card.hidden {
+    display: none;
+}
+
+h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-main);
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--text-main);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-hover);
+}
+
+@media (min-width: 640px) {
+    .btn {
+        width: auto;
+    }
+}
+
+/* Home Section Styles */
+.features-list {
+    margin-bottom: 40px;
+}
+
+.feature-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.disclaimer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border-color);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* Questionnaire Styles */
+.progress-container {
+    background-color: var(--secondary-color);
+    height: 8px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background-color: var(--primary-color);
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.question-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.options-list {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.option-btn {
+    padding: 16px;
+    text-align: left;
+    background-color: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.option-btn:hover {
+    border-color: var(--primary-color);
+    background-color: rgba(79, 70, 229, 0.05);
+}
+
+.option-btn.selected {
+    border-color: var(--primary-color);
+    background-color: rgba(79, 70, 229, 0.1);
+    font-weight: 500;
+}
+
+.nav-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.nav-controls .hidden {
+    display: none;
+}
+
+/* Results Styles */
+.result-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 .badge {
-    background: var(--mu-goldenrod);
-    color: var(--mu-obsidian);
-    padding: 4px 12px;
+    display: inline-block;
+    padding: 8px 16px;
     border-radius: 20px;
     font-weight: 700;
-    font-size: 0.7rem;
+    font-size: 1.125rem;
+    margin-top: 10px;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge.strong-choice { background-color: var(--color-strong); color: white; }
+.badge.could-work { background-color: var(--color-work); color: white; }
+.badge.not-the-best-fit { background-color: var(--color-fit); color: white; }
+
+.result-item {
+    margin-bottom: 30px;
+}
+
+.result-item h3 {
+    font-size: 1.125rem;
+    margin-bottom: 12px;
+    color: var(--text-main);
+}
+
+.result-item ul {
+    list-style-type: none;
+}
+
+.result-item li {
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 12px;
+}
+
+.result-item li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+#result-checklist li::before {
+    content: "☐";
+}
+
+.hint-text {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.result-footer {
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Footer Badge */
+.ai-badge {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    background-color: var(--secondary-color);
+    border-radius: 4px;
+    color: var(--text-muted);
 }

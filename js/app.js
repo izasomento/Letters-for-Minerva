@@ -1,44 +1,168 @@
 /**
- * app.js — [App Name]
- *
- * Entry point for all application logic.
- * Keep this file organized by feature area as the app grows.
- * See SCRATCHPAD.md for current milestone and DECISIONS.md for
- * architectural choices made so far.
+ * Who2Ask — Application Logic
  */
 
-// ============================================================
-// State
-// ============================================================
-
+// State Management
 const state = {
-  // Add your application state here
+  currentQuestionIndex: 0,
+  answers: [], // Array of selected option objects
+  totalScore: 0,
+  hasRedFlag: false,
+  recommenderRole: '' // From Q1
 };
 
-// ============================================================
-// Initialization
-// ============================================================
+// DOM Elements
+const sections = {
+  home: document.getElementById('home-section'),
+  questionnaire: document.getElementById('questionnaire-section'),
+  results: document.getElementById('results-section')
+};
 
+const elements = {
+  startBtn: document.getElementById('start-btn'),
+  restartBtn: document.getElementById('restart-btn'),
+  nextBtn: document.getElementById('next-btn'),
+  prevBtn: document.getElementById('prev-btn'),
+  progressBar: document.getElementById('progress-bar'),
+  questionContent: document.getElementById('question-content'),
+  resultBadge: document.getElementById('result-badge'),
+  resultMeaning: document.getElementById('result-meaning'),
+  resultNextSteps: document.getElementById('result-next-steps'),
+  resultChecklist: document.getElementById('result-checklist')
+};
+
+// Initialization
 function init() {
-  // Runs once on page load.
-  // Set up event listeners, load initial data, render first view.
-  console.log('[App] initialized');
+  elements.startBtn.addEventListener('click', startEvaluation);
+  elements.restartBtn.addEventListener('click', restartEvaluation);
+  elements.nextBtn.addEventListener('click', goToNextQuestion);
+  elements.prevBtn.addEventListener('click', goToPrevQuestion);
 }
 
-// ============================================================
-// Event handlers — add yours below
-// ============================================================
+// Navigation Functions
+function startEvaluation() {
+  state.currentQuestionIndex = 0;
+  state.answers = [];
+  state.totalScore = 0;
+  state.hasRedFlag = false;
+  
+  showSection('questionnaire');
+  renderQuestion();
+}
 
-// ============================================================
-// Rendering — add render functions below
-// ============================================================
+function restartEvaluation() {
+  showSection('home');
+}
 
-// ============================================================
-// Utilities — add shared helpers below
-// ============================================================
+function showSection(sectionId) {
+  Object.values(sections).forEach(section => section.classList.add('hidden'));
+  sections[sectionId].classList.remove('hidden');
+}
 
-// ============================================================
-// Boot
-// ============================================================
+// Questionnaire Logic
+function renderQuestion() {
+  const question = questions[state.currentQuestionIndex];
+  const progress = ((state.currentQuestionIndex) / questions.length) * 100;
+  
+  elements.progressBar.style.width = `${progress}%`;
+  
+  let html = `
+    <h3 class="question-text">${question.text}</h3>
+    <div class="options-list">
+  `;
+  
+  question.options.forEach((option, index) => {
+    const isSelected = state.answers[state.currentQuestionIndex] === option;
+    html += `
+      <button class="option-btn ${isSelected ? 'selected' : ''}" 
+              onclick="selectOption(${index})">
+        ${option.text}
+      </button>
+    `;
+  });
+  
+  html += `</div>`;
+  elements.questionContent.innerHTML = html;
+  
+  // Update Buttons
+  elements.prevBtn.classList.toggle('hidden', state.currentQuestionIndex === 0);
+  elements.nextBtn.disabled = !state.answers[state.currentQuestionIndex];
+  elements.nextBtn.innerText = state.currentQuestionIndex === questions.length - 1 ? 'Show Results' : 'Next';
+}
 
-document.addEventListener('DOMContentLoaded', init);
+function selectOption(optionIndex) {
+  const question = questions[state.currentQuestionIndex];
+  const selectedOption = question.options[optionIndex];
+  
+  state.answers[state.currentQuestionIndex] = selectedOption;
+  
+  // Re-render to show selection
+  renderQuestion();
+}
+
+function goToNextQuestion() {
+  if (state.currentQuestionIndex < questions.length - 1) {
+    state.currentQuestionIndex++;
+    renderQuestion();
+  } else {
+    calculateResults();
+  }
+}
+
+function goToPrevQuestion() {
+  if (state.currentQuestionIndex > 0) {
+    state.currentQuestionIndex--;
+    renderQuestion();
+  }
+}
+
+// Scoring Logic
+function calculateResults() {
+  state.totalScore = 0;
+  state.hasRedFlag = false;
+  
+  state.answers.forEach((answer, index) => {
+    state.totalScore += answer.score;
+    if (answer.isRedFlag) state.hasRedFlag = true;
+    if (index === 0) state.recommenderRole = answer.text;
+  });
+  
+  displayResults();
+}
+
+function displayResults() {
+  let result;
+  
+  if (state.hasRedFlag || state.totalScore < resultCategories.COULD_WORK.minScore) {
+    result = resultCategories.NOT_BEST_FIT;
+  } else if (state.totalScore >= resultCategories.STRONG.minScore) {
+    result = resultCategories.STRONG;
+  } else {
+    result = resultCategories.COULD_WORK;
+  }
+  
+  // Update UI
+  elements.resultBadge.innerText = result.label;
+  elements.resultBadge.className = 'badge ' + result.label.toLowerCase().replace(/ /g, '-');
+  
+  elements.resultMeaning.innerText = result.meaning;
+  
+  elements.resultNextSteps.innerHTML = result.nextSteps
+    .map(step => `<li>${step}</li>`)
+    .join('');
+    
+  elements.resultChecklist.innerHTML = result.checklist
+    .map(item => `<li>${item}</li>`)
+    .join('');
+    
+  showSection('results');
+  
+  // Smooth scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Global scope for onclick handlers in template literals
+window.selectOption = selectOption;
+
+// Run init
+init();

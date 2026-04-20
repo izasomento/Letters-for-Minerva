@@ -1,14 +1,14 @@
-# [PROJECT NAME] — Project Context
+# Who2Ask — Project Context
 
 ## Project Identity
 
-**Name**: [Your App Name]
-**Purpose**: [One sentence — what does this app do, and why does it matter to the people who use it?]
-**Audience**: [Who uses this? What do they already know, and what are they trying to do?]
-**Human context**: [What changes in how people think, learn, or act because this app exists?]
+**Name**: Who2Ask
+**Purpose**: Help prospective university applicants figure out who to ask for recommendation letters and how to prepare before reaching out.
+**Audience**: High school students, first-generation, and international applicants.
+**Human context**: Empowering students with clarity and confidence during a high-stakes, often opaque part of the application process.
 
-**GitHub repo**: [username/repo-name]
-**Live URL**: [https://username.github.io/repo-name]
+**GitHub repo**: izasomento/Who2Ask
+**Live URL**: https://izasomento.github.io/Who2Ask
 
 ## Tech Stack
 

@@ -26,7 +26,7 @@
 
 ## Decision 001 — Vanilla HTML/CSS/JS, no framework
 
-**Date**: [YYYY-MM-DD]
+**Date**: 2026-04-20
 **Decision**: Use plain HTML, CSS, and JavaScript with no build step and no framework.
 **Rationale**: GitHub Pages hosts static files directly. No framework means no build pipeline, no dependencies to update, no abstraction between the code and the browser. The project remains readable and modifiable by anyone with basic web knowledge, which aligns with the learning-orientation principle of clarity over cleverness.
 **Alternatives considered**: React, Vue, Svelte — all require a build step or CDN dependency; Astro — adds complexity for a single-page app
@@ -34,7 +34,7 @@
 
 ## Decision 002 — Ethical AI & Data Privacy Guardrails
 
-**Date**: [YYYY-MM-DD]
+**Date**: 2026-04-20
 **Decision**: Adoption of Minerva University's AI Guardrails for all project development and deployment.
 **Rationale**: To protect data privacy (especially student PII), ensure intellectual property integrity, and maintain human-centered learning. This project prioritizes human agency and accountability, treating AI as a "thinking partner" rather than a substitute.
 **Specific Guardrails for this Project**:

@@ -3,38 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Your App Name] — Minerva University</title>
+    <title>Who2Ask — Recommendation Evaluation Tool</title>
     <link rel="stylesheet" href="css/styles.css">
+    <!-- Google Fonts for a friendly look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <header class="app-header">
         <div class="container">
-            <h1>[Your App Name]</h1>
-            <p class="subtitle">[One-sentence purpose]</p>
+            <h1 class="logo">Who2Ask</h1>
         </div>
     </header>
 
-    <main class="container">
-        <!-- Students will build their app here -->
-        <section id="app-placeholder">
-            <h2>Ready to start?</h2>
-            <p>Tell Gemini what your first milestone is, or ask: "What should we build first for [App Name]?"</p>
+    <main id="app-container" class="container">
+        <!-- Home Section -->
+        <section id="home-section" class="card active">
+            <h2>Find Your Best Recommenders</h2>
+            <p class="subtitle">Choosing who to ask for a recommendation letter can be stressful. Who2Ask helps you evaluate your options so you can build a strong support team for your applications.</p>
+            
+            <div class="features-list">
+                <div class="feature-item">
+                    <span class="feature-icon">🔍</span>
+                    <div>
+                        <strong>Evaluate with Depth</strong>
+                        <p>Answer 8 questions to see how strong your connection is.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📝</span>
+                    <div>
+                        <strong>Get Next Steps</strong>
+                        <p>Receive personalized advice on how to approach your recommender.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">✅</span>
+                    <div>
+                        <strong>Prepare to Ask</strong>
+                        <p>Get a checklist of what to send to make their job easier.</p>
+                    </div>
+                </div>
+            </div>
+
+            <button id="start-btn" class="btn btn-primary">Start Evaluation</button>
+            
+            <p class="disclaimer">
+                <strong>Note:</strong> This is a guidance tool designed to help you reflect on your choices, not official admissions advice. It does not predict admissions outcomes or guarantee a positive recommendation.
+            </p>
+        </section>
+
+        <!-- Questionnaire Section -->
+        <section id="questionnaire-section" class="card hidden">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div id="question-content">
+                <!-- Question will be injected here -->
+            </div>
+            <div class="nav-controls">
+                <button id="prev-btn" class="btn btn-secondary hidden">Back</button>
+                <button id="next-btn" class="btn btn-primary" disabled>Next</button>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="card hidden">
+            <div class="result-header">
+                <h2>Your Evaluation Results</h2>
+                <div id="result-badge" class="badge"></div>
+            </div>
+            
+            <div class="result-body">
+                <div class="result-item">
+                    <h3>What this means</h3>
+                    <p id="result-meaning"></p>
+                </div>
+
+                <div class="result-item">
+                    <h3>Next Steps</h3>
+                    <ul id="result-next-steps"></ul>
+                </div>
+
+                <div class="result-item">
+                    <h3>Your Preparation Checklist</h3>
+                    <p class="hint-text">Send these materials to your recommender once they agree to help:</p>
+                    <ul id="result-checklist"></ul>
+                </div>
+            </div>
+
+            <div class="result-footer">
+                <button id="restart-btn" class="btn btn-secondary">Evaluate Someone Else</button>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container footer-content">
-            <div class="copyright">
-                &copy; 2026 Minerva University Student Project
-            </div>
-            <!-- MANDATORY AI DISCLOSURE (per Minerva Guardrails) -->
-            <div class="ai-disclosure">
-                <span class="badge">AI-Assisted</span>
-                Developed with Gemini CLI & Minerva AI Framework
-            </div>
-        </div>
+    <footer class="app-footer container">
+        <p>&copy; 2026 Who2Ask. Empowering student agency in the admissions process.</p>
+        <p class="ai-badge">AI-Assisted Development</p>
     </footer>
 
+    <!-- Scripts -->
+    <script src="js/questions.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
