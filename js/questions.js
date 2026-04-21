@@ -94,54 +94,55 @@ const resultCategories = {
   STRONG: {
     label: "Strong Choice",
     minScore: 10,
-    meaning: "Excellent candidate! They have the depth of knowledge to advocate for you effectively.",
+    meaning: "Excellent candidate! They have the depth of knowledge to speak to your fit for Minerva effectively.",
     nextSteps: [
       "Ask them as soon as possible!",
-      "Send a polite email requesting a meeting to discuss your goals.",
-      "Share why you are asking *them* specifically."
+      "Send a polite email requesting a meeting to discuss your goals for Minerva.",
+      "Explain why you think they are best positioned to speak to your fit for this unique model."
     ],
     checklist: [
       "Updated resume or brag sheet",
-      "List of specific programs/universities",
+      "Brief overview of why you are applying to Minerva",
+      "Specific qualities (e.g. self-management, curiosity) you'd like them to highlight",
       "Clear deadline dates and submission instructions"
     ]
   },
   COULD_WORK: {
     label: "Could Work",
     minScore: 5,
-    meaning: "This person is a reasonable option who likely wants to support you, but you'll need to prepare carefully to help them write a strong, specific letter.",
+    meaning: "This person is a reasonable option who likely wants to support you, but they'll need more context about Minerva's unique application process.",
     nextSteps: [
-      "Schedule a conversation to discuss your goals and your shared history.",
-      "If they agree, provide very specific anecdotes from your time together.",
+      "Schedule a conversation to discuss your interest in Minerva and your shared history.",
+      "If they agree, provide very specific anecdotes that demonstrate maturity or independence.",
       "Offer to walk them through your 'brag sheet' in person or on a call."
     ],
     checklist: [
-      "Detailed brag sheet highlighting specific accomplishments in their context",
-      "A summary of your goals and what you hope they can highlight",
+      "Detailed brag sheet highlighting accomplishments with Minerva-specific context",
+      "A summary of why Minerva is the right fit for your goals",
       "Clear deadline dates"
     ],
     extraGuidance: {
       title: "How to strengthen this relationship before asking",
       steps: [
-        "Schedule a brief 15-minute conversation to discuss your academic interests or professional goals.",
+        "Schedule a brief 15-minute conversation to discuss your academic interests and why you're drawn to Minerva.",
         "Follow up on a specific piece of feedback they gave you to show you are listening and growing.",
         "Prepare a 'memory sheet' with 2-3 specific moments where you learned or showed effort in their context.",
-        "Share your 'Why'—explain the deeper motivation behind the path you are pursuing."
+        "Share your 'Why'—explain the deeper motivation behind the global path you are pursuing."
       ]
     }
   },
   NOT_BEST_FIT: {
     label: "Not the Best Fit",
     minScore: -Infinity,
-    meaning: "Proceed with caution. This person might not have enough specific, recent context to help you stand out effectively.",
+    meaning: "Proceed with caution. This person might not have enough specific, recent context to help you stand out in the Minerva process.",
     nextSteps: [
       "Consider reaching out to other potential recommenders first.",
-      "If you have no other options, provide an extremely detailed 'brag sheet'.",
+      "If you have no other options, provide an extremely detailed 'brag sheet' focused on Minerva's values.",
       "Ask them if they feel they can write a *strong* letter, and give them an easy 'out' if they are too busy."
     ],
     checklist: [
-      "Comprehensive brag sheet covering your entire relationship",
-      "A draft or outline of specific strengths you hope they might cover",
+      "Comprehensive brag sheet emphasizing maturity, independence, and global mindset",
+      "A draft or outline of specific strengths you hope they can connect to your Minerva application",
       "Very clear deadlines (the easier you make it, the better)"
     ],
     extraGuidance: {
@@ -149,7 +150,7 @@ const resultCategories = {
       steps: [
         "Attend office hours or stay after meetings to ask a thoughtful question about the material or a project.",
         "Be consistent in your effort and presence; reliability is often as important as performance.",
-        "Briefly share your goals or interests after a session to help them see you as a person, not just a student.",
+        "Briefly share your goals or interest in Minerva after a session to help them see you as an independent person.",
         "Follow through on suggestions they make—this shows you value their expertise and are coachable.",
         "Remember that strong relationships are built over time through small, consistent interactions."
       ]

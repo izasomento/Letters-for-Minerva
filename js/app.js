@@ -239,37 +239,36 @@ function generateInsights(answers) {
   const concerns = [];
 
   // Q2: How well
-  if (answers[1].text === 'Very well') strengths.push('Has a deep personal or professional connection with you.');
-  if (answers[1].text === 'Not very well') concerns.push('Connection might be too surface-level for a detailed letter.');
+  if (answers[1].text === 'Very well') strengths.push('Deep personal/professional connection');
+  if (answers[1].text === 'Not very well') concerns.push('Limited, surface-level connection');
 
   // Q3: Context
-  if (answers[2].text === 'Multiple contexts') strengths.push('Can speak to your abilities across different environments.');
+  if (answers[2].text === 'Multiple contexts') strengths.push('Perspective from multiple environments');
 
   // Q4: Growth
-  if (answers[3].text === 'Yes, over a long period') strengths.push('Has witnessed your long-term growth and consistency.');
-  if (answers[3].text === 'No, it was a brief interaction') concerns.push('Limited observation window may result in a generic letter.');
+  if (answers[3].text === 'Yes, over a long period') strengths.push('Observed long-term growth/consistency');
+  if (answers[3].text === 'No, it was a brief interaction') concerns.push('Brief interaction window');
 
   // Q5: Specificity
-  if (answers[4].text === 'Yes, they can provide specific examples') strengths.push('Able to provide the vivid anecdotes that admissions officers value.');
-  if (answers[4].text === 'No, they only know my basic info') concerns.push('May struggle to move beyond generic praise or basic facts.');
+  if (answers[4].text === 'Yes, they can provide specific examples') strengths.push('Can provide vivid, specific anecdotes');
+  if (answers[4].text === 'No, they only know my basic info') concerns.push('Generic knowledge only');
 
   // Q6: Recent
-  if (answers[5].text === 'Yes, currently or within the last year') strengths.push('Can provide an up-to-date perspective on your current strengths.');
-  if (answers[5].text === 'No, it\'s been several years') concerns.push('Insights might feel outdated to an admissions committee.');
+  if (answers[5].text === 'Yes, currently or within the last year') strengths.push('Current, up-to-date perspective');
+  if (answers[5].text === 'No, it\'s been several years') concerns.push('Insights may feel outdated');
 
   // Q7: Supportive
-  if (answers[6].text === 'Yes, definitely') strengths.push('A genuine advocate who is likely to put in the extra effort.');
-  if (answers[6].text === 'No, they seem too busy or unenthusiastic') concerns.push('Major risk: An unenthusiastic letter can be a significant red flag.');
+  if (answers[6].text === 'Yes, definitely') strengths.push('Enthusiastic advocate');
+  if (answers[6].text === 'No, they seem too busy or unenthusiastic') concerns.push('Risk: unenthusiastic or too busy');
 
   // Q8: Deadline
-  if (answers[7].text === 'Urgent (less than 2 weeks)') concerns.push('Rushing a recommender often leads to a less thoughtful letter.');
+  if (answers[7].text === 'Urgent (less than 2 weeks)') concerns.push('Rushed timeline (< 2 weeks)');
 
   return { strengths, concerns };
 }
 
 function showRanking() {
   const sorted = [...state.evaluatedRecommenders].sort((a, b) => b.score - a.score);
-  // Store sorted list in state so we can reference by index correctly
   state.currentSortedRanking = sorted;
   
   elements.rankingList.innerHTML = sorted.map((rec, index) => `
@@ -287,7 +286,6 @@ function showRanking() {
           <span class="score-number">SCORE: ${rec.score}</span>
         </div>
       </button>
-      <!-- Detail container starts empty -->
       <div class="ranking-detail hidden" id="rank-detail-${index}" role="region"></div>
     </div>
   `).join('');
@@ -303,56 +301,55 @@ function toggleDetail(index) {
   
   const isOpening = detailPanel.classList.contains('hidden');
   
-  // 1. Close and clear ALL other panels first
   document.querySelectorAll('.ranking-detail').forEach(panel => {
     panel.classList.add('hidden');
-    panel.innerHTML = ''; // Remove from DOM for true lazy rendering
+    panel.innerHTML = ''; 
   });
   document.querySelectorAll('.ranking-card').forEach(c => c.classList.remove('expanded'));
   document.querySelectorAll('.ranking-item').forEach(b => b.setAttribute('aria-expanded', 'false'));
   
-  // 2. If we are opening THIS one, render content and show
   if (isOpening) {
     detailPanel.innerHTML = `
-      <div class="detail-grid">
-        <div class="detail-column">
-          <h5>Strengths</h5>
-          <ul class="insight-list">
-            ${rec.insights.strengths.length > 0 
-              ? rec.insights.strengths.map(s => `<li>${s}</li>`).join('')
-              : '<li>No major strengths identified.</li>'}
-          </ul>
+      <div class="detail-inner">
+        <div class="detail-grid">
+          <div class="detail-column">
+            <h5>Strengths</h5>
+            <ul class="insight-list">
+              ${rec.insights.strengths.length > 0 
+                ? rec.insights.strengths.map(s => `<li>${s}</li>`).join('')
+                : '<li>No major strengths identified.</li>'}
+            </ul>
+          </div>
+          <div class="detail-column">
+            <h5>Possible Concerns</h5>
+            <ul class="insight-list">
+              ${rec.insights.concerns.length > 0 
+                ? rec.insights.concerns.map(c => `<li>${c}</li>`).join('')
+                : '<li>No major concerns identified.</li>'}
+            </ul>
+          </div>
         </div>
-        <div class="detail-column">
-          <h5>Possible Concerns</h5>
-          <ul class="insight-list">
-            ${rec.insights.concerns.length > 0 
-              ? rec.insights.concerns.map(c => `<li>${c}</li>`).join('')
-              : '<li>No major concerns identified.</li>'}
-          </ul>
+        
+        <div class="detail-next-step">
+          <h5>Suggested Next Step</h5>
+          <p>${rec.nextSteps[0]}</p>
         </div>
-      </div>
-      
-      <div class="detail-summary">
-        <h5>Suggested Next Step</h5>
-        <p>${rec.nextSteps[0]}</p>
-      </div>
 
-      ${rec.extraGuidance ? `
-        <div class="detail-extra-guidance">
-          <h5>${rec.extraGuidance.title}</h5>
-          <ul class="insight-list">
-            ${rec.extraGuidance.steps.map(step => `<li>${step}</li>`).join('')}
-          </ul>
-        </div>
-      ` : ''}
+        ${rec.extraGuidance ? `
+          <div class="detail-extra-guidance">
+            <h6>${rec.extraGuidance.title}</h6>
+            <ul class="insight-list small">
+              ${rec.extraGuidance.steps.map(step => `<li>${step}</li>`).join('')}
+            </ul>
+          </div>
+        ` : ''}
+      </div>
     `;
 
     detailPanel.classList.remove('hidden');
     card.classList.add('expanded');
     button.setAttribute('aria-expanded', 'true');
     
-    // Accessibility: Scroll into view
     setTimeout(() => {
         card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }, 50);
