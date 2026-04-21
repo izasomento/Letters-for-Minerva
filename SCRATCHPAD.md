@@ -80,7 +80,8 @@ Polish the design, improve responsiveness/accessibility, and finalize the conten
 
 **State found**: App MVP complete and functional.
 **Action taken**: Added a comparison and ranking feature. Users can now input a name for each recommender, save results to a session-based list, and view a ranked ranking page. Refined the UI with academic-editorial styling. Renamed the app to "Letters for Minerva".
-**State left**: App with multi-recommender comparison is functional.
+- Highlighted the word "Letters" in the main heading with `var(--mu-goldenrod)`.
+**State left**: App with multi-recommender comparison is functional. Visual polish added to branding.
 
 **Disclosure**:
 **AI Tool(s) Used**: Gemini CLI

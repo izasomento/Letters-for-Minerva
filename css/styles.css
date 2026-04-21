@@ -105,6 +105,10 @@ body {
     text-transform: uppercase;
 }
 
+.highlight {
+    color: var(--mu-goldenrod);
+}
+
 #app-container {
     min-height: 60vh;
 }
